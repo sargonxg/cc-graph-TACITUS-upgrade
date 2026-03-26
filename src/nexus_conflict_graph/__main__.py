@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Allow running as `python -m create_context_graph`."""
+"""Allow running as `python -m nexus_conflict_graph`."""
 
-from create_context_graph.cli import main
+from nexus_conflict_graph.cli import main
 
 main()

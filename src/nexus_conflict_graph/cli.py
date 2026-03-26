@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""CLI entry point for create-context-graph."""
+"""CLI entry point for nexus-conflict-graph."""
 
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ import click
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from create_context_graph.config import SUPPORTED_FRAMEWORKS, FRAMEWORK_ALIASES, ProjectConfig
-from create_context_graph.ontology import list_available_domains, load_domain
-from create_context_graph.renderer import ProjectRenderer
+from nexus_conflict_graph.config import SUPPORTED_FRAMEWORKS, FRAMEWORK_ALIASES, ProjectConfig
+from nexus_conflict_graph.ontology import list_available_domains, load_domain
+from nexus_conflict_graph.renderer import ProjectRenderer
 
 console = Console()
 
@@ -58,7 +58,7 @@ console = Console()
 @click.option("--reset-database", is_flag=True, help="Clear all Neo4j data before ingesting")
 @click.option("--verbose", is_flag=True, help="Enable verbose debug output")
 @click.option("--list-domains", is_flag=True, help="List available domains and exit")
-@click.version_option(package_name="create-context-graph")
+@click.version_option(package_name="nexus-conflict-graph")
 def main(
     project_name: str | None,
     domain: str | None,
@@ -106,7 +106,7 @@ def main(
         if not anthropic_api_key:
             console.print("[red]Error:[/red] --anthropic-api-key is required for custom domain generation.")
             raise SystemExit(1)
-        from create_context_graph.custom_domain import (
+        from nexus_conflict_graph.custom_domain import (
             display_ontology_summary,
             generate_custom_domain,
         )
@@ -129,7 +129,7 @@ def main(
 
     # Handle Neo4j Aura .env import
     if neo4j_aura_env:
-        from create_context_graph.wizard import _parse_aura_env
+        from nexus_conflict_graph.wizard import _parse_aura_env
         neo4j_uri, neo4j_username, neo4j_password = _parse_aura_env(neo4j_aura_env)
 
     # Determine neo4j_type from flags
@@ -166,7 +166,7 @@ def main(
         )
     else:
         # Launch interactive wizard
-        from create_context_graph.wizard import run_wizard
+        from nexus_conflict_graph.wizard import run_wizard
 
         config = run_wizard()
 
@@ -195,7 +195,7 @@ def main(
     if custom_ontology:
         ontology = custom_ontology
     elif config.custom_domain_yaml:
-        from create_context_graph.ontology import load_domain_from_yaml_string
+        from nexus_conflict_graph.ontology import load_domain_from_yaml_string
         ontology = load_domain_from_yaml_string(config.custom_domain_yaml)
     else:
         try:
@@ -223,7 +223,7 @@ def main(
     fixture_path = out / "data" / "fixtures.json"
     if config.generate_data or demo_data:
         console.print("\n[bold]Generating demo data...[/bold]")
-        from create_context_graph.generator import generate_fixture_data
+        from nexus_conflict_graph.generator import generate_fixture_data
 
         generate_fixture_data(
             ontology,
@@ -235,7 +235,7 @@ def main(
     if config.saas_connectors:
         import json
 
-        from create_context_graph.connectors import get_connector, merge_connector_results, NormalizedData
+        from nexus_conflict_graph.connectors import get_connector, merge_connector_results, NormalizedData
 
         console.print("\n[bold]Importing data from connected services...[/bold]")
         results: list[NormalizedData] = []
@@ -262,7 +262,7 @@ def main(
     # Reset Neo4j database if requested
     if reset_database:
         console.print("\n[bold]Resetting Neo4j database...[/bold]")
-        from create_context_graph.ingest import reset_neo4j
+        from nexus_conflict_graph.ingest import reset_neo4j
 
         try:
             reset_neo4j(
@@ -277,7 +277,7 @@ def main(
     # Ingest into Neo4j if requested
     if ingest and fixture_path.exists():
         console.print("\n[bold]Ingesting data into Neo4j...[/bold]")
-        from create_context_graph.ingest import ingest_data
+        from nexus_conflict_graph.ingest import ingest_data
 
         ingest_data(
             fixture_path,

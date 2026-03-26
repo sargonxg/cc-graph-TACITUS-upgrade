@@ -30,7 +30,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from create_context_graph.ontology import DomainOntology, generate_cypher_schema
+from nexus_conflict_graph.ontology import DomainOntology, generate_cypher_schema
 
 console = Console()
 

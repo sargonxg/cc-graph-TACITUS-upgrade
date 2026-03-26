@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-End-to-end smoke test for create-context-graph.
+End-to-end smoke test for nexus-conflict-graph.
 
 Scaffolds a project, starts the backend (+ optionally frontend), seeds data,
 then sends every demo scenario prompt to the chat API and validates responses.
@@ -109,7 +109,7 @@ def log(msg: str, level: str = "INFO") -> None:
 
 def load_demo_scenarios(domain: str) -> list[dict]:
     """Load demo scenarios from domain YAML."""
-    domains_dir = Path(__file__).parent.parent / "src" / "create_context_graph" / "domains"
+    domains_dir = Path(__file__).parent.parent / "src" / "nexus_conflict_graph" / "domains"
     yaml_path = domains_dir / f"{domain}.yaml"
     if not yaml_path.exists():
         log(f"Domain YAML not found: {yaml_path}", "FAIL")
@@ -177,10 +177,10 @@ def evaluate_response(prompt: str, response: dict) -> tuple[bool, str]:
 
 
 def scaffold_project(domain: str, framework: str, output_dir: Path) -> bool:
-    """Scaffold a project using create-context-graph CLI."""
+    """Scaffold a project using nexus-conflict-graph CLI."""
     log(f"Scaffolding {domain} + {framework} → {output_dir}")
     cmd = [
-        sys.executable, "-m", "create_context_graph",
+        sys.executable, "-m", "nexus_conflict_graph",
         "test-app",
         "--domain", domain,
         "--framework", framework,
@@ -480,7 +480,7 @@ def print_summary(summaries: list[TestSummary]) -> bool:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="E2E smoke test for create-context-graph")
+    parser = argparse.ArgumentParser(description="E2E smoke test for nexus-conflict-graph")
     parser.add_argument("--domain", help="Domain to test (e.g., healthcare)")
     parser.add_argument("--framework", default="pydanticai", help="Agent framework (default: pydanticai)")
     parser.add_argument("--all-domains", action="store_true", help="Test all 22 domains")
@@ -493,7 +493,7 @@ def main() -> None:
 
     # Determine domains to test
     if args.all_domains:
-        domains_dir = Path(__file__).parent.parent / "src" / "create_context_graph" / "domains"
+        domains_dir = Path(__file__).parent.parent / "src" / "nexus_conflict_graph" / "domains"
         domains = sorted(
             p.stem for p in domains_dir.glob("*.yaml")
             if not p.stem.startswith("_")

@@ -19,7 +19,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
-from create_context_graph.connectors import (
+from nexus_conflict_graph.connectors import (
     BaseConnector,
     NormalizedData,
     register_connector,
@@ -50,7 +50,7 @@ class GitHubConnector(BaseConnector):
                 "name": "repo",
                 "prompt": "GitHub repository (owner/repo):",
                 "secret": False,
-                "description": "e.g. neo4j-labs/create-context-graph",
+                "description": "e.g. neo4j-labs/nexus-conflict-graph",
             },
         ]
 

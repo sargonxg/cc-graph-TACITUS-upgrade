@@ -1,4 +1,5 @@
 # Copyright 2026 Neo4j Labs
+# Copyright 2026 TACITUS (tacitus.me)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,6 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Create Context Graph - Interactive CLI scaffolding tool for domain-specific context graph applications."""
+"""NEXUS — Conflict Intelligence Graph Platform.
 
-__version__ = "0.5.0"
+Part of the TACITUS product suite (tacitus.me).
+Built upon create-context-graph by Neo4j Labs (Apache 2.0).
+
+Generates domain-specific conflict analysis applications with Neo4j,
+FastAPI, and AI agents grounded in the Agentic Conflict Ontology (ACO) v2.0.
+"""
+
+__version__ = "1.0.0-alpha.1"

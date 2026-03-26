@@ -23,8 +23,8 @@ from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
-from create_context_graph.config import ProjectConfig
-from create_context_graph.ontology import (
+from nexus_conflict_graph.config import ProjectConfig
+from nexus_conflict_graph.ontology import (
     DomainOntology,
     generate_cypher_schema,
     generate_pydantic_models,
@@ -70,7 +70,7 @@ class ProjectRenderer:
         self.config = config
         self.ontology = ontology
         self.env = Environment(
-            loader=PackageLoader("create_context_graph", "templates"),
+            loader=PackageLoader("nexus_conflict_graph", "templates"),
             keep_trailing_newline=True,
             trim_blocks=True,
             lstrip_blocks=True,
@@ -307,7 +307,7 @@ class ProjectRenderer:
             # Write custom domain YAML directly
             (data_dir / "ontology.yaml").write_text(self.config.custom_domain_yaml)
         else:
-            from create_context_graph.ontology import _get_domains_path
+            from nexus_conflict_graph.ontology import _get_domains_path
 
             domain_yaml = _get_domains_path() / f"{self.config.domain}.yaml"
             if domain_yaml.exists():
@@ -319,7 +319,7 @@ class ProjectRenderer:
             shutil.copy2(base_yaml, data_dir / "_base.yaml")
 
         # Copy pre-generated fixtures if available
-        fixtures_dir = Path(str(files("create_context_graph") / "fixtures"))
+        fixtures_dir = Path(str(files("nexus_conflict_graph") / "fixtures"))
         fixture_file = fixtures_dir / f"{self.config.domain}.json"
         if fixture_file.exists():
             shutil.copy2(fixture_file, data_dir / "fixtures.json")

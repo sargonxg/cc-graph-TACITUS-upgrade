@@ -1,33 +1,37 @@
 {
-  "name": "create-context-graph",
-  "version": "0.5.0",
-  "description": "Interactive CLI scaffolding tool for domain-specific context graph applications with Neo4j",
+  "name": "nexus-conflict-graph",
+  "version": "1.0.0-alpha.1",
+  "description": "NEXUS — Conflict Intelligence Graph Platform. Scaffolds conflict analysis apps with Neo4j, FastAPI, and AI agents. Part of the TACITUS suite.",
   "bin": {
-    "create-context-graph": "./bin/create-context-graph"
+    "nexus-conflict-graph": "./bin/nexus-conflict-graph"
   },
   "keywords": [
     "neo4j",
-    "context-graph",
+    "conflict-graph",
+    "conflict-intelligence",
     "ai-agent",
     "scaffolding",
     "cli",
-    "knowledge-graph",
-    "pydanticai",
-    "langgraph",
-    "crewai"
+    "tacitus",
+    "nexus",
+    "dispute-resolution",
+    "knowledge-graph"
   ],
-  "author": "William Lyon",
+  "author": "Giulio Catanzariti <gc@tacitus.me>",
+  "contributors": [
+    "William Lyon"
+  ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neo4j-labs/create-context-graph"
+    "url": "https://github.com/sargonxg/cc-graph-TACITUS-upgrade"
   },
-  "homepage": "https://github.com/neo4j-labs/create-context-graph",
+  "homepage": "https://tacitus.me/nexus",
   "engines": {
     "node": ">=18"
   },
   "files": [
-    "bin/create-context-graph",
+    "bin/nexus-conflict-graph",
     "README.md"
   ]
 }

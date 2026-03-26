@@ -19,8 +19,8 @@ from pathlib import Path
 
 import pytest
 
-from create_context_graph.generator import generate_fixture_data
-from create_context_graph.ontology import load_domain
+from nexus_conflict_graph.generator import generate_fixture_data
+from nexus_conflict_graph.ontology import load_domain
 
 
 class TestGenerateFixtureData:
@@ -141,7 +141,7 @@ class TestGenerateMultipleDomains:
 def _all_fixture_domain_ids():
     """List all domain IDs that have shipped fixture files."""
     from importlib.resources import files
-    fixtures_dir = Path(str(files("create_context_graph") / "fixtures"))
+    fixtures_dir = Path(str(files("nexus_conflict_graph") / "fixtures"))
     return [p.stem for p in sorted(fixtures_dir.glob("*.json"))]
 
 
@@ -151,7 +151,7 @@ class TestShippedFixtureQuality:
     @pytest.fixture
     def fixture_data(self, request):
         from importlib.resources import files
-        fixtures_dir = Path(str(files("create_context_graph") / "fixtures"))
+        fixtures_dir = Path(str(files("nexus_conflict_graph") / "fixtures"))
         path = fixtures_dir / f"{request.param}.json"
         return json.loads(path.read_text())
 

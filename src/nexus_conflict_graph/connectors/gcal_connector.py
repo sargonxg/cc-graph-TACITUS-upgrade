@@ -19,12 +19,12 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from create_context_graph.connectors import (
+from nexus_conflict_graph.connectors import (
     BaseConnector,
     NormalizedData,
     register_connector,
 )
-from create_context_graph.connectors.oauth import check_gws_cli, run_gws_command
+from nexus_conflict_graph.connectors.oauth import check_gws_cli, run_gws_command
 
 
 @register_connector("gcal")
@@ -74,7 +74,7 @@ class GCalConnector(BaseConnector):
                 "Install with: pip install google-api-python-client google-auth-oauthlib"
             )
 
-        from create_context_graph.connectors.oauth import oauth2_authorize
+        from nexus_conflict_graph.connectors.oauth import oauth2_authorize
 
         tokens = oauth2_authorize(
             auth_url="https://accounts.google.com/o/oauth2/v2/auth",

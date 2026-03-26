@@ -29,8 +29,8 @@ from pydantic import ValidationError
 from rich.console import Console
 from rich.table import Table
 
-from create_context_graph.generator import _get_llm_client, _llm_generate
-from create_context_graph.ontology import (
+from nexus_conflict_graph.generator import _get_llm_client, _llm_generate
+from nexus_conflict_graph.ontology import (
     DomainOntology,
     _get_custom_domains_path,
     load_domain_from_yaml_string,
@@ -176,7 +176,7 @@ Please fix the errors and generate a corrected YAML. Output ONLY the valid YAML 
 
 def _load_example_yamls() -> tuple[str, list[str]]:
     """Load the base YAML and two reference domain YAMLs."""
-    domains_dir = Path(str(files("create_context_graph") / "domains"))
+    domains_dir = Path(str(files("nexus_conflict_graph") / "domains"))
 
     base_path = domains_dir / "_base.yaml"
     base_yaml = base_path.read_text() if base_path.exists() else ""
@@ -310,7 +310,7 @@ def display_ontology_summary(ontology: DomainOntology, target_console: Console |
 
 
 def save_custom_domain(ontology: DomainOntology, yaml_content: str) -> Path:
-    """Save a custom domain YAML to ~/.create-context-graph/custom-domains/.
+    """Save a custom domain YAML to ~/.nexus-conflict-graph/custom-domains/.
 
     Returns the path the file was saved to.
     """

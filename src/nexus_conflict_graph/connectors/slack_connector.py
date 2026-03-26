@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from create_context_graph.connectors import (
+from nexus_conflict_graph.connectors import (
     BaseConnector,
     NormalizedData,
     register_connector,

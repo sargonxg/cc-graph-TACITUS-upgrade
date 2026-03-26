@@ -18,7 +18,7 @@ import re
 
 import pytest
 
-from create_context_graph.ontology import (
+from nexus_conflict_graph.ontology import (
     DomainOntology,
     EntityTypeDef,
     PropertyDef,
@@ -171,7 +171,7 @@ class TestLoadAllDomains:
 
     def test_no_color_collisions_with_base(self):
         """BUG-013: No domain entity should share a color with a base POLE+O entity."""
-        from create_context_graph.ontology import load_domain as _load
+        from nexus_conflict_graph.ontology import load_domain as _load
         base = _load("healthcare")  # any domain to get base types
         # Collect base entity colors (Person, Organization, Location, Event, Object)
         base_labels = {"Person", "Organization", "Location", "Event", "Object"}

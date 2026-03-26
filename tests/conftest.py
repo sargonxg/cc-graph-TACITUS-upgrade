@@ -21,8 +21,8 @@ from pathlib import Path
 
 import pytest
 
-from create_context_graph.config import ProjectConfig
-from create_context_graph.ontology import load_domain
+from nexus_conflict_graph.config import ProjectConfig
+from nexus_conflict_graph.ontology import load_domain
 
 
 def pytest_addoption(parser):

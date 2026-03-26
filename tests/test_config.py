@@ -14,7 +14,7 @@
 
 """Unit tests for the config module."""
 
-from create_context_graph.config import (
+from nexus_conflict_graph.config import (
     FRAMEWORK_ALIASES,
     FRAMEWORK_DEPENDENCIES,
     FRAMEWORK_DISPLAY_NAMES,

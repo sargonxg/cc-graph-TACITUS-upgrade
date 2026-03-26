@@ -25,9 +25,9 @@ import json
 import pytest
 import yaml
 
-from create_context_graph.config import ProjectConfig
-from create_context_graph.ontology import load_domain
-from create_context_graph.renderer import ProjectRenderer
+from nexus_conflict_graph.config import ProjectConfig
+from nexus_conflict_graph.ontology import load_domain
+from nexus_conflict_graph.renderer import ProjectRenderer
 
 
 @pytest.fixture
@@ -607,7 +607,7 @@ class TestHealthcareEnumCompilation:
     """Verify healthcare models.py with blood type enums compiles."""
 
     def test_healthcare_models_compile(self, tmp_path):
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
 
         config = ProjectConfig(
             project_name="Healthcare Test",
@@ -631,7 +631,7 @@ class TestGISCartographyEnumCompilation:
     """Verify gis-cartography models.py with 3d_model enum compiles."""
 
     def test_gis_models_compile(self, tmp_path):
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
 
         config = ProjectConfig(
             project_name="GIS Test",
@@ -1114,20 +1114,20 @@ class TestDomainSpecificNamePools:
     """Verify static data uses domain-specific names."""
 
     def test_label_names_exist(self):
-        from create_context_graph.name_pools import LABEL_NAMES
+        from nexus_conflict_graph.name_pools import LABEL_NAMES
         assert "Diagnosis" in LABEL_NAMES
         assert "Account" in LABEL_NAMES
         assert "Repository" in LABEL_NAMES
         assert "Species" in LABEL_NAMES
 
     def test_get_names_for_label_uses_label_pool(self):
-        from create_context_graph.name_pools import get_names_for_label
+        from nexus_conflict_graph.name_pools import get_names_for_label
         names = get_names_for_label("Diagnosis", "OBJECT", 5)
         # Should be medical terms, not generic object names
         assert any("Diabetes" in n or "Hypertension" in n for n in names)
 
     def test_get_names_for_label_falls_back(self):
-        from create_context_graph.name_pools import get_names_for_label
+        from nexus_conflict_graph.name_pools import get_names_for_label
         names = get_names_for_label("UnknownLabel", "PERSON", 3)
         # Should fall back to PERSON_NAMES pool
         assert len(names) == 3
@@ -1215,7 +1215,7 @@ class TestV051Regressions:
 
     def test_name_pools_confidence_clamped(self):
         """Confidence/score/rating float values should be clamped to 0-1 range."""
-        from create_context_graph.name_pools import generate_property_value
+        from nexus_conflict_graph.name_pools import generate_property_value
         for _ in range(20):
             val = generate_property_value("confidence", "float", "Test", "Decision", 0)
             assert 0.0 <= val <= 1.0, f"confidence={val} out of range"
@@ -1224,19 +1224,19 @@ class TestV051Regressions:
 
     def test_name_pools_currency_realistic(self):
         """Currency property should return actual currency codes, not template strings."""
-        from create_context_graph.name_pools import generate_property_value
+        from nexus_conflict_graph.name_pools import generate_property_value
         val = generate_property_value("currency", "string", "Wire Transfer", "Transaction", 0)
         assert val in ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF", "CNY", "INR", "BRL"]
 
     def test_name_pools_ticker_realistic(self):
         """Ticker property should return actual ticker symbols."""
-        from create_context_graph.name_pools import generate_property_value
+        from nexus_conflict_graph.name_pools import generate_property_value
         val = generate_property_value("ticker", "string", "Apple Inc", "Security", 0)
         assert len(val) <= 5 and val.isupper()
 
     def test_name_pools_description_no_workflow(self):
         """Description values should not contain 'management workflow' boilerplate."""
-        from create_context_graph.name_pools import generate_property_value
+        from nexus_conflict_graph.name_pools import generate_property_value
         val = generate_property_value("description", "string", "Test Entity", "Patient", 0)
         assert "management workflow" not in val
 

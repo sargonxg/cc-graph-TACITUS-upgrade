@@ -19,7 +19,7 @@ from pathlib import Path
 # Add src to path so we can import project modules
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from create_context_graph.ontology import list_available_domains, load_domain
+from nexus_conflict_graph.ontology import list_available_domains, load_domain
 
 try:
     import anthropic
@@ -28,7 +28,7 @@ except ImportError:
     sys.exit(1)
 
 
-FIXTURES_DIR = Path(__file__).parent.parent / "src" / "create_context_graph" / "fixtures"
+FIXTURES_DIR = Path(__file__).parent.parent / "src" / "nexus_conflict_graph" / "fixtures"
 MODEL = "claude-sonnet-4-20250514"
 MAX_RETRIES = 3
 

@@ -33,7 +33,7 @@ from typing import Any
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
-from create_context_graph.ontology import DomainOntology
+from nexus_conflict_graph.ontology import DomainOntology
 
 console = Console()
 
@@ -140,7 +140,7 @@ Return a JSON array of objects. Each object must have a "name" field plus the ot
 
 def _generate_static_entities(et) -> list[dict]:
     """Generate realistic static entities when no LLM is available."""
-    from create_context_graph.name_pools import (
+    from nexus_conflict_graph.name_pools import (
         generate_property_value,
         get_names_for_label,
     )
@@ -271,7 +271,7 @@ def _generate_static_document(template, ontology, entities, index) -> str:
 
     context_str = ", ".join(context_parts) if context_parts else f"the {ontology.domain.name} domain"
 
-    from create_context_graph.name_pools import generate_date
+    from nexus_conflict_graph.name_pools import generate_date
 
     doc_date = generate_date()
 

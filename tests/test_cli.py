@@ -21,7 +21,7 @@ from pathlib import Path
 import pytest
 from click.testing import CliRunner
 
-from create_context_graph.cli import main
+from nexus_conflict_graph.cli import main
 
 
 @pytest.fixture

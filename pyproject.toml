@@ -3,25 +3,28 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "create-context-graph"
-version = "0.5.0"
-description = "Interactive CLI scaffolding tool for domain-specific context graph applications"
+name = "nexus-conflict-graph"
+version = "1.0.0-alpha.1"
+description = "NEXUS — Conflict Intelligence Graph Platform. Scaffolds conflict analysis apps with Neo4j, FastAPI, and AI agents. Part of the TACITUS suite."
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.11"
 authors = [
+    { name = "Giulio Catanzariti", email = "gc@tacitus.me" },
     { name = "William Lyon" },
 ]
-keywords = ["neo4j", "context-graph", "ai-agent", "scaffolding", "cli"]
+keywords = ["neo4j", "conflict-graph", "conflict-intelligence", "ai-agent", "scaffolding", "cli", "tacitus", "nexus", "dispute-resolution"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering :: Information Analysis",
 ]
 dependencies = [
     "click>=8.1",
@@ -54,20 +57,23 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "pytest-asyncio>=0.24",
+    "ruff>=0.4",
 ]
 all = [
-    "create-context-graph[generate,ingest,connectors]",
+    "nexus-conflict-graph[generate,ingest,connectors]",
 ]
 
 [project.scripts]
-create-context-graph = "create_context_graph.cli:main"
+nexus-conflict-graph = "nexus_conflict_graph.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/neo4j-labs/create-context-graph"
-Repository = "https://github.com/neo4j-labs/create-context-graph"
+Homepage = "https://tacitus.me/nexus"
+Repository = "https://github.com/sargonxg/cc-graph-TACITUS-upgrade"
+Documentation = "https://nexus.tacitus.me"
+"Bug Tracker" = "https://github.com/sargonxg/cc-graph-TACITUS-upgrade/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/create_context_graph"]
+packages = ["src/nexus_conflict_graph"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -75,3 +81,11 @@ asyncio_mode = "auto"
 markers = [
     "slow: marks tests as slow (run with --slow)",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
