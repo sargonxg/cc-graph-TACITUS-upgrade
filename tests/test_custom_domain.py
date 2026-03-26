@@ -19,7 +19,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from pydantic import ValidationError
 
-from create_context_graph.custom_domain import (
+from nexus_conflict_graph.custom_domain import (
     _build_domain_generation_prompt,
     _build_retry_prompt,
     _strip_yaml_fences,
@@ -27,7 +27,7 @@ from create_context_graph.custom_domain import (
     generate_custom_domain,
     save_custom_domain,
 )
-from create_context_graph.ontology import (
+from nexus_conflict_graph.ontology import (
     DomainOntology,
     list_available_domains,
     load_domain_from_yaml_string,
@@ -279,8 +279,8 @@ class TestStripYamlFences:
 
 
 class TestGenerateCustomDomain:
-    @patch("create_context_graph.custom_domain._llm_generate")
-    @patch("create_context_graph.custom_domain._get_llm_client")
+    @patch("nexus_conflict_graph.custom_domain._llm_generate")
+    @patch("nexus_conflict_graph.custom_domain._get_llm_client")
     def test_success(self, mock_get_client, mock_generate):
         mock_get_client.return_value = (MagicMock(), "anthropic")
         mock_generate.return_value = VALID_DOMAIN_YAML
@@ -290,8 +290,8 @@ class TestGenerateCustomDomain:
         assert ontology.domain.id == "test-domain"
         assert raw_yaml == VALID_DOMAIN_YAML.strip()
 
-    @patch("create_context_graph.custom_domain._llm_generate")
-    @patch("create_context_graph.custom_domain._get_llm_client")
+    @patch("nexus_conflict_graph.custom_domain._llm_generate")
+    @patch("nexus_conflict_graph.custom_domain._get_llm_client")
     def test_retry_on_validation_error(self, mock_get_client, mock_generate):
         mock_get_client.return_value = (MagicMock(), "anthropic")
         # First call returns invalid, second returns valid
@@ -301,8 +301,8 @@ class TestGenerateCustomDomain:
         assert isinstance(ontology, DomainOntology)
         assert mock_generate.call_count == 2
 
-    @patch("create_context_graph.custom_domain._llm_generate")
-    @patch("create_context_graph.custom_domain._get_llm_client")
+    @patch("nexus_conflict_graph.custom_domain._llm_generate")
+    @patch("nexus_conflict_graph.custom_domain._get_llm_client")
     def test_max_retries_exceeded(self, mock_get_client, mock_generate):
         mock_get_client.return_value = (MagicMock(), "anthropic")
         mock_generate.return_value = INVALID_DOMAIN_YAML
@@ -311,7 +311,7 @@ class TestGenerateCustomDomain:
             generate_custom_domain("test domain", "fake-key", max_retries=2)
 
     def test_no_client_raises(self):
-        with patch("create_context_graph.custom_domain._get_llm_client", return_value=(None, None)):
+        with patch("nexus_conflict_graph.custom_domain._get_llm_client", return_value=(None, None)):
             with pytest.raises(ValueError, match="Could not initialize LLM client"):
                 generate_custom_domain("test", "fake")
 
@@ -334,7 +334,7 @@ class TestDisplayAndSave:
         ontology = load_domain_from_yaml_string(VALID_DOMAIN_YAML)
 
         with patch(
-            "create_context_graph.custom_domain._get_custom_domains_path",
+            "nexus_conflict_graph.custom_domain._get_custom_domains_path",
             return_value=tmp_path / "custom-domains",
         ):
             path = save_custom_domain(ontology, VALID_DOMAIN_YAML)
@@ -350,7 +350,7 @@ class TestDisplayAndSave:
         (custom_dir / "my-custom.yaml").write_text(VALID_DOMAIN_YAML)
 
         with patch(
-            "create_context_graph.ontology._get_custom_domains_path",
+            "nexus_conflict_graph.ontology._get_custom_domains_path",
             return_value=custom_dir,
         ):
             domains = list_available_domains()

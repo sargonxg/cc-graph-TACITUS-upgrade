@@ -19,8 +19,8 @@ from pathlib import Path
 
 import pytest
 
-from create_context_graph.ontology import load_domain
-from create_context_graph.renderer import (
+from nexus_conflict_graph.ontology import load_domain
+from nexus_conflict_graph.renderer import (
     ProjectRenderer,
     _to_camel_case,
     _to_kebab_case,
@@ -97,7 +97,7 @@ class TestProjectRenderer:
         assert (tmp_output / "docker-compose.yml").exists()  # docker type
 
     def test_no_docker_compose_for_aura(self, tmp_output):
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
         config = ProjectConfig(
             project_name="Test",
             domain="financial-services",
@@ -379,7 +379,7 @@ class TestProjectRenderer:
 
     def test_neo4j_local_makefile_targets(self, tmp_output):
         """Verify neo4j-local type generates neo4j-start/stop targets."""
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
         config = ProjectConfig(
             project_name="Test Local",
             domain="financial-services",
@@ -398,7 +398,7 @@ class TestProjectRenderer:
 
     def test_aura_no_docker_or_local_targets(self, tmp_output):
         """Verify aura type has no docker or neo4j-local targets."""
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
         config = ProjectConfig(
             project_name="Test Aura",
             domain="financial-services",
@@ -450,7 +450,7 @@ class TestAllFrameworksRender:
         "anthropic-tools",
     ])
     def test_framework_agent_compiles(self, framework, tmp_path):
-        from create_context_graph.config import ProjectConfig
+        from nexus_conflict_graph.config import ProjectConfig
 
         config = ProjectConfig(
             project_name="Test",
@@ -488,7 +488,7 @@ class TestAllFrameworksRender:
         "anthropic-tools",
     ])
     def test_framework_pyproject_has_deps(self, framework, tmp_path):
-        from create_context_graph.config import FRAMEWORK_DEPENDENCIES, ProjectConfig
+        from nexus_conflict_graph.config import FRAMEWORK_DEPENDENCIES, ProjectConfig
 
         config = ProjectConfig(
             project_name="Test",

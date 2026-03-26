@@ -21,12 +21,12 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from create_context_graph.config import (
+from nexus_conflict_graph.config import (
     FRAMEWORK_DISPLAY_NAMES,
     SUPPORTED_FRAMEWORKS,
     ProjectConfig,
 )
-from create_context_graph.ontology import list_available_domains
+from nexus_conflict_graph.ontology import list_available_domains
 
 console = Console()
 
@@ -101,8 +101,8 @@ def run_wizard() -> ProjectConfig:
     selected_connectors: list[str] = []
     saas_credentials: dict[str, dict[str, str]] = {}
     if data_source == "saas":
-        from create_context_graph.connectors import list_connectors, get_connector
-        from create_context_graph.connectors.oauth import check_gws_cli, install_gws_cli
+        from nexus_conflict_graph.connectors import list_connectors, get_connector
+        from nexus_conflict_graph.connectors.oauth import check_gws_cli, install_gws_cli
 
         available = list_connectors()
         connector_choices = [
@@ -185,7 +185,7 @@ def run_wizard() -> ProjectConfig:
             raise SystemExit("API key required.")
 
         # Generate the domain
-        from create_context_graph.custom_domain import (
+        from nexus_conflict_graph.custom_domain import (
             display_ontology_summary,
             generate_custom_domain,
             save_custom_domain,

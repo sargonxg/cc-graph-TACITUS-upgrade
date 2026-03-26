@@ -146,10 +146,10 @@ def merge_connector_results(results: list[NormalizedData]) -> NormalizedData:
 # Import all connectors to register them
 # ---------------------------------------------------------------------------
 
-from create_context_graph.connectors.github_connector import GitHubConnector  # noqa: E402, F401
-from create_context_graph.connectors.notion_connector import NotionConnector  # noqa: E402, F401
-from create_context_graph.connectors.jira_connector import JiraConnector  # noqa: E402, F401
-from create_context_graph.connectors.slack_connector import SlackConnector  # noqa: E402, F401
-from create_context_graph.connectors.gmail_connector import GmailConnector  # noqa: E402, F401
-from create_context_graph.connectors.gcal_connector import GCalConnector  # noqa: E402, F401
-from create_context_graph.connectors.salesforce_connector import SalesforceConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.github_connector import GitHubConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.notion_connector import NotionConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.jira_connector import JiraConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.slack_connector import SlackConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.gmail_connector import GmailConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.gcal_connector import GCalConnector  # noqa: E402, F401
+from nexus_conflict_graph.connectors.salesforce_connector import SalesforceConnector  # noqa: E402, F401

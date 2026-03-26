@@ -18,7 +18,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from create_context_graph.connectors import (
+from nexus_conflict_graph.connectors import (
     CONNECTOR_REGISTRY,
     BaseConnector,
     NormalizedData,
@@ -155,7 +155,7 @@ class TestGitHubConnector:
         mock_github_module.Github.return_value = mock_client
 
         with patch.dict("sys.modules", {"github": mock_github_module}):
-            from create_context_graph.connectors.github_connector import GitHubConnector
+            from nexus_conflict_graph.connectors.github_connector import GitHubConnector
 
             conn = GitHubConnector()
             conn.authenticate({"token": "fake", "repo": "owner/repo"})
@@ -174,7 +174,7 @@ class TestNotionConnector:
         mock_notion_module.Client.return_value = mock_client
 
         with patch.dict("sys.modules", {"notion_client": mock_notion_module}):
-            from create_context_graph.connectors.notion_connector import NotionConnector
+            from nexus_conflict_graph.connectors.notion_connector import NotionConnector
 
             conn = NotionConnector()
             conn.authenticate({"token": "fake"})
@@ -192,7 +192,7 @@ class TestJiraConnector:
         mock_atlassian_module.Jira.return_value = mock_jira
 
         with patch.dict("sys.modules", {"atlassian": mock_atlassian_module}):
-            from create_context_graph.connectors.jira_connector import JiraConnector
+            from nexus_conflict_graph.connectors.jira_connector import JiraConnector
 
             conn = JiraConnector()
             conn.authenticate({
@@ -215,7 +215,7 @@ class TestSlackConnector:
         mock_slack_module.WebClient.return_value = mock_client
 
         with patch.dict("sys.modules", {"slack_sdk": mock_slack_module}):
-            from create_context_graph.connectors.slack_connector import SlackConnector
+            from nexus_conflict_graph.connectors.slack_connector import SlackConnector
 
             conn = SlackConnector()
             conn.authenticate({"token": "xoxb-fake", "channels": "all"})
@@ -225,12 +225,12 @@ class TestSlackConnector:
 
 
 class TestGmailConnector:
-    @patch("create_context_graph.connectors.gmail_connector.check_gws_cli", return_value=True)
-    @patch("create_context_graph.connectors.gmail_connector.run_gws_command")
+    @patch("nexus_conflict_graph.connectors.gmail_connector.check_gws_cli", return_value=True)
+    @patch("nexus_conflict_graph.connectors.gmail_connector.run_gws_command")
     def test_fetch_via_gws(self, mock_gws, mock_check):
         mock_gws.return_value = []
 
-        from create_context_graph.connectors.gmail_connector import GmailConnector
+        from nexus_conflict_graph.connectors.gmail_connector import GmailConnector
 
         conn = GmailConnector()
         conn.authenticate({})
@@ -238,9 +238,9 @@ class TestGmailConnector:
 
         assert isinstance(result, NormalizedData)
 
-    @patch("create_context_graph.connectors.gmail_connector.check_gws_cli", return_value=False)
+    @patch("nexus_conflict_graph.connectors.gmail_connector.check_gws_cli", return_value=False)
     def test_fallback_needs_credentials(self, mock_check):
-        from create_context_graph.connectors.gmail_connector import GmailConnector
+        from nexus_conflict_graph.connectors.gmail_connector import GmailConnector
 
         conn = GmailConnector()
         prompts = conn.get_credential_prompts()
@@ -248,12 +248,12 @@ class TestGmailConnector:
 
 
 class TestGCalConnector:
-    @patch("create_context_graph.connectors.gcal_connector.check_gws_cli", return_value=True)
-    @patch("create_context_graph.connectors.gcal_connector.run_gws_command")
+    @patch("nexus_conflict_graph.connectors.gcal_connector.check_gws_cli", return_value=True)
+    @patch("nexus_conflict_graph.connectors.gcal_connector.run_gws_command")
     def test_fetch_via_gws(self, mock_gws, mock_check):
         mock_gws.return_value = []
 
-        from create_context_graph.connectors.gcal_connector import GCalConnector
+        from nexus_conflict_graph.connectors.gcal_connector import GCalConnector
 
         conn = GCalConnector()
         conn.authenticate({})
@@ -282,7 +282,7 @@ class TestSalesforceConnector:
 
 class TestOAuthHelpers:
     def test_check_gws_cli(self):
-        from create_context_graph.connectors.oauth import check_gws_cli
+        from nexus_conflict_graph.connectors.oauth import check_gws_cli
 
         # Should return bool regardless of system state
         result = check_gws_cli()
@@ -290,12 +290,12 @@ class TestOAuthHelpers:
 
     @patch("shutil.which", return_value=None)
     def test_check_gws_cli_not_found(self, mock_which):
-        from create_context_graph.connectors.oauth import check_gws_cli
+        from nexus_conflict_graph.connectors.oauth import check_gws_cli
 
         assert check_gws_cli() is False
 
     @patch("shutil.which", return_value="/usr/local/bin/gws")
     def test_check_gws_cli_found(self, mock_which):
-        from create_context_graph.connectors.oauth import check_gws_cli
+        from nexus_conflict_graph.connectors.oauth import check_gws_cli
 
         assert check_gws_cli() is True

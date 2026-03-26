@@ -20,12 +20,12 @@ import base64
 import json
 from typing import Any
 
-from create_context_graph.connectors import (
+from nexus_conflict_graph.connectors import (
     BaseConnector,
     NormalizedData,
     register_connector,
 )
-from create_context_graph.connectors.oauth import check_gws_cli, run_gws_command
+from nexus_conflict_graph.connectors.oauth import check_gws_cli, run_gws_command
 
 
 @register_connector("gmail")
@@ -77,7 +77,7 @@ class GmailConnector(BaseConnector):
                 "Install with: pip install google-api-python-client google-auth-oauthlib"
             )
 
-        from create_context_graph.connectors.oauth import oauth2_authorize
+        from nexus_conflict_graph.connectors.oauth import oauth2_authorize
 
         tokens = oauth2_authorize(
             auth_url="https://accounts.google.com/o/oauth2/v2/auth",

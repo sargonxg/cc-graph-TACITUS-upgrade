@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * create-context-graph — npm wrapper
+ * nexus-conflict-graph — npm wrapper
  *
  * This is a thin shim that delegates to the Python CLI.
  * It tries (in order): uvx, pipx, python3 -m
@@ -35,37 +35,37 @@ function commandExists(cmd) {
 
 // Try uvx (preferred — uses uv's ephemeral environment)
 if (commandExists("uvx")) {
-  if (tryRun("uvx", ["create-context-graph", ...args])) {
+  if (tryRun("uvx", ["nexus-conflict-graph", ...args])) {
     process.exit(0);
   }
 }
 
 // Try pipx
 if (commandExists("pipx")) {
-  if (tryRun("pipx", ["run", "create-context-graph", ...args])) {
+  if (tryRun("pipx", ["run", "nexus-conflict-graph", ...args])) {
     process.exit(0);
   }
 }
 
 // Try python3 -m (package installed globally or in active venv)
 if (commandExists("python3")) {
-  if (tryRun("python3", ["-m", "create_context_graph", ...args])) {
+  if (tryRun("python3", ["-m", "nexus_conflict_graph", ...args])) {
     process.exit(0);
   }
 }
 
 // Nothing worked
 console.error(`
-  create-context-graph requires Python 3.11+
+  nexus-conflict-graph requires Python 3.11+
 
   Install uv (recommended):
     curl -LsSf https://astral.sh/uv/install.sh | sh
 
   Then run:
-    uvx create-context-graph
+    uvx nexus-conflict-graph
 
   Or install directly:
-    pip install create-context-graph
-    create-context-graph
+    pip install nexus-conflict-graph
+    nexus-conflict-graph
 `);
 process.exit(1);

@@ -20,11 +20,11 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from create_context_graph.neo4j_validator import validate_connection
+from nexus_conflict_graph.neo4j_validator import validate_connection
 
 
 class TestValidateConnection:
-    @patch("create_context_graph.neo4j_validator.GraphDatabase")
+    @patch("nexus_conflict_graph.neo4j_validator.GraphDatabase")
     def test_successful_connection(self, mock_gdb):
         mock_driver = MagicMock()
         mock_session = MagicMock()
@@ -43,7 +43,7 @@ class TestValidateConnection:
         assert "Connected successfully" in message
         mock_driver.verify_connectivity.assert_called_once()
 
-    @patch("create_context_graph.neo4j_validator.GraphDatabase")
+    @patch("nexus_conflict_graph.neo4j_validator.GraphDatabase")
     def test_auth_error(self, mock_gdb):
         from neo4j.exceptions import AuthError
 
@@ -58,7 +58,7 @@ class TestValidateConnection:
         assert success is False
         assert "Authentication failed" in message
 
-    @patch("create_context_graph.neo4j_validator.GraphDatabase")
+    @patch("nexus_conflict_graph.neo4j_validator.GraphDatabase")
     def test_service_unavailable(self, mock_gdb):
         from neo4j.exceptions import ServiceUnavailable
 
@@ -73,7 +73,7 @@ class TestValidateConnection:
         assert success is False
         assert "Cannot connect" in message
 
-    @patch("create_context_graph.neo4j_validator.GraphDatabase")
+    @patch("nexus_conflict_graph.neo4j_validator.GraphDatabase")
     def test_generic_error(self, mock_gdb):
         mock_gdb.driver.side_effect = RuntimeError("Something broke")
 

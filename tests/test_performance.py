@@ -21,8 +21,8 @@ import time
 import pytest
 from click.testing import CliRunner
 
-from create_context_graph.cli import main
-from create_context_graph.ontology import list_available_domains
+from nexus_conflict_graph.cli import main
+from nexus_conflict_graph.ontology import list_available_domains
 
 
 @pytest.fixture
