@@ -1,5 +1,20 @@
 # NEXUS — historical TACITUS prototype
 
+<!-- tacitus-practical-entry -->
+## Purpose, code and a playable introduction
+
+Inspect a graph-application generator and its conflict-analysis vocabulary before adapting a scaffold to a concrete research workflow.
+
+**Historical generator experiment.** Historical NEXUS generator experiment. Generated applications require independent configuration, source provenance and runtime tests.
+
+[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+
+![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+
+Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
+<!-- /tacitus-practical-entry -->
+
+
 [![TACITUS](https://img.shields.io/badge/TACITUS-historical%20prototype-6B7280)](https://tacitus.me)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
